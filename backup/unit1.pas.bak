@@ -5,8 +5,8 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls;
+  Classes, SysUtils, FileUtil, Math, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  ValEdit, ComCtrls, Grids, ExtCtrls;
 
 type
 
@@ -15,58 +15,253 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
-    Hladaj: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Image1: TImage;
+    predaj: TEdit;
+    ID: TEdit;
+    Pocet: TEdit;
     Memo1: TMemo;
     Memo2: TMemo;
+    StringGrid1: TStringGrid;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    { private declarations }
+
   public
-    { public declarations }
+
   end;
    type
-     zaznam=record
-       nazov:string;
-       kod:integer;
-
-     end;
-     const
-      n=5;
+  hodnoty=record
+    kod:integer;
+    nazov:string;
+    nakup:string;
+    predaj:string;
+  end;
+type
+  trvale=record
+    kod:integer;
+    pokles:integer;
+    dokup:integer;
+    nazov:string;
+  end;
 var
   Form1: TForm1;
- vsetko :array[1..N] of zaznam;
- znak:char;
+  sklad,cena,tovar,transakcia,statistiky:textfile;
+  pole:array of hodnoty;
+  prikazy:array of trvale;
+  riadky,prikaz:integer;
+  aktual:boolean;
 implementation
 
 {$R *.lfm}
 
 { TForm1 }
 
-procedure TForm1.Button1Click(Sender: TObject);
-var subor: textfile;
-    i:integer;
+procedure TForm1.FormCreate(Sender: TObject);
+var i,z,k:integer;c:char;cislo,price,namee:string;
 begin
-  i:=0;
-   assignfile(subor,'Cenotvorba.txt');
-   reset(subor);
-   for i:=1 to N do
-     begin
-       read(subor,znak);
-        repeat
-        vsetko[i].nazov:=vsetko[i].nazov+znak;
-        read(subor,znak);
-       until znak=' ';
+//READ SUBOROV
+cislo:='';
+price:='';
+namee:='';
+  AssignFile(sklad,'tovar.txt');
+  AssignFile(cena,'cennik.txt');
+  prikaz:=0;
 
 
-     read(subor,vsetko[i].kod);
+begin
 
-      memo1.append(inttostr(vsetko[i].kod)+' '+vsetko[i].nazov);
+
+
+//tovar
+Reset(sklad);
+  ReadLn(sklad,riadky);
+  SetLength(pole,riadky);
+  StringGrid1.RowCount:=riadky+1;
+  StringGrid1.ColCount:=4;
+  for i:=0 to riadky-1 do
+  begin
+    Read(sklad,c);
+    repeat
+        cislo:=cislo+c;
+      Read(sklad,c);
+    until c=';';
+    pole[i].kod:=StrToInt(cislo);
+    cislo:='';
+    ReadLn(sklad,pole[i].nazov);
+    StringGrid1.Cells[0,i+1]:=IntToStr(pole[i].kod);
+    StringGrid1.Cells[1,i+1]:=pole[i].nazov;
+  end;
+
+
+  ReWrite(sklad);
+  WriteLn(sklad,riadky);
+  for k:=0 to riadky-1 do
+  begin
+    WriteLn(sklad,pole[k].kod,';',pole[k].nazov);
+    StringGrid1.Cells[0,k+1]:=IntToStr(pole[k].kod);
+    StringGrid1.Cells[1,k+1]:=pole[k].nazov;
+
+
+  end;
+  CloseFile(sklad);
+end;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var z,cisla:boolean;i,k:integer;
+begin
+aktual:=false;
+z:=false;
+i:=0;
+repeat
+  cisla:=true;
+  if (ID.Text = pole[i].nazov) then
+  begin
+    z:=true;
+    if StrToInT(Pocet.Text)>0 then
+    begin
+      pole[i].nakup:=pole[i].nakup+Pocet.Text;
+      ReWrite(cena);
+      WriteLn(cena,riadky);
+      for k:=0 to riadky-1 do
+      begin
+        WriteLn(cena,pole[k].kod,';',pole[k].nakup);
+      end;
+      CloseFile(cena);
+
+    end
+    else
+      ShowMessage('Zadajte kladne cislo');
+  end
+  else
+  begin
+    for k:=1 to length(ID.Text) do
+    begin
+      if (ID.Text[k] < '0') or (ID.Text[k] > '9') then
+      begin
+        cisla:=false;
+      end;
     end;
+    if cisla=true then
+    begin
+      if StrToInt(ID.Text)=pole[i].kod then
+      begin
+        z:=true;
+        if StrTofloat(Pocet.Text)>0 then
+        begin
+          pole[i].nakup:=pole[i].nakup+Pocet.Text;
+          ReWrite(cena);
+          WriteLn(cena,riadky);
+          for k:=0 to riadky-1 do
+          begin
+            {WriteLn(cena,pole[k].kod,';',pole[k].nakup);}
+            StringGrid1.Cells[2,k+1]:=pole[k].nakup;
+          end;
+          CloseFile(cena);
+
+
+        end
+        else
+          ShowMessage('Zadajte kladne cislo');
+      end;
+    end;
+  end;
+  inc(i);
+until (z=true) or (i=riadky);
+if z=false then
+  ShowMessage('Vami zadany nazov alebo kod produktu nie je v databaze');
+aktual:=true;
+
+
+
+
+
+
+
+aktual:=false;
+z:=false;
+i:=0;
+repeat
+  cisla:=true;
+  if (ID.Text = pole[i].nazov) then
+  begin
+    z:=true;
+    if StrToint(predaj.Text)>0 then
+    begin
+      pole[i].predaj:=pole[i].predaj+predaj.Text;
+      ReWrite(cena);
+      WriteLn(cena,riadky);
+      for k:=0 to riadky-1 do
+      begin
+        {WriteLn(cena,pole[k].kod,';',pole[k].predaj);}
+      end;
+      CloseFile(cena);
+      //aktualizacia tabulky
+
+      //tu dojde generovanie transakcie
+      {AssignFile(transakcia,'N'+IntToStr(Random(8999999999)+1000000000)+'.txt');
+      ReWrite(transakcia);
+      WriteLn(transakcia,pole[i].kod,';',Pocet.Text+';'+FloatToStr(pole[i].cena));
+      CloseFile(transakcia);}
+    end
+    else
+      ShowMessage('Dokúpiť môžete len kladné množstvo tovaru');
+  end
+  else
+  begin
+    for k:=1 to length(ID.Text) do
+    begin
+      if (ID.Text[k] < '0') or (ID.Text[k] > '9') then
+      begin
+        cisla:=false;
+      end;
+    end;
+    if cisla=true then
+    begin
+      if StrToInt(ID.Text)=pole[i].kod then
+      begin
+        z:=true;
+        if StrToInT(predaj.Text)>0 then
+        begin
+          pole[i].predaj:=pole[i].predaj+predaj.Text;
+          ReWrite(cena);
+          WriteLn(cena,riadky);
+          for k:=0 to riadky-1 do
+          begin
+            {WriteLn(cena,pole[k].kod,';',pole[k].nakup,';',pole[k].predaj,';');}
+            StringGrid1.Cells[3,k+1]:=pole[k].predaj;
+          end;
+          CloseFile(cena);
+          //aktualizacia tabulky
+          //tu dojde generovanie transakcie
+
+        end
+        else
+          ShowMessage('Dokúpiť môžete len kladné množstvo tovaru');
+      end;
+    end;
+  end;
+  inc(i);
+until (z=true) or (i=riadky);
+if z=false then
+  ShowMessage('Vami zadany nazov alebo kod produktu nie je v databaze');
+aktual:=true;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+var k,i:integer;
+begin
+k:=0;
+begin
+     Reset(cena);
+     ReWrite(cena);
+          WriteLn(cena,riadky);
+          for k:=0 to riadky-1 do
+          begin
+  WriteLn(cena,pole[k].kod,';',pole[k].nakup,';',pole[k].predaj,';');
+end;
+end;
+CloseFile(cena);
 end;
 
 end.
