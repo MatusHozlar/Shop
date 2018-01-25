@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Math, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ValEdit, ComCtrls, Grids, ExtCtrls;
+  ValEdit, ComCtrls, Grids, ExtCtrls, Spin, EditBtn;
 
 type
 
@@ -15,18 +15,18 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    pocet: TFloatSpinEdit;
+    predaj: TFloatSpinEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    predaj: TEdit;
     ID: TEdit;
-    Pocet: TEdit;
-    Memo1: TMemo;
-    Memo2: TMemo;
     StringGrid1: TStringGrid;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure AhojChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure pocetChange(Sender: TObject);
     procedure predajChange(Sender: TObject);
     procedure predajClick(Sender: TObject);
   private
@@ -34,12 +34,13 @@ type
   public
 
   end;
+  type TTranslateString = type string;
    type
   hodnoty=record
     kod:integer;
     nazov:string;
-    nakup:string;
-    predaj:string;
+    nakup:float;
+    predaj:float;
   end;
 var
   Form1: TForm1;
@@ -106,6 +107,11 @@ Reset(sklad);
 end;
 end;
 
+procedure TForm1.pocetChange(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.predajChange(Sender: TObject);
 begin
 
@@ -132,7 +138,7 @@ repeat
     z:=true;
     if StrToInT(Pocet.Text)>0 then
     begin
-      pole[i].nakup:=pole[i].nakup+Pocet.Text;
+      pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
       ReWrite(cena);
       WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
@@ -159,14 +165,14 @@ repeat
       if StrToInt(ID.Text)=pole[i].kod then
       begin
         z:=true;
-        if StrToInT(Pocet.Text)>0 then
+        if strtofloat(Pocet.Text)>0 then
         begin
-          pole[i].nakup:=pole[i].nakup+Pocet.Text;
+          pole[i].nakup:=pole[i].nakup+strtofloat(Pocet.text);
           ReWrite(cena);
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
-            StringGrid1.Cells[2,k+1]:=pole[k].nakup;
+            StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
           CloseFile(cena);
 
@@ -195,7 +201,7 @@ repeat
     z:=true;
     if StrToint(predaj.Text)>0 then
     begin
-      pole[i].predaj:=pole[i].predaj+predaj.Text;
+      pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
       ReWrite(cena);
       WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
@@ -219,14 +225,14 @@ repeat
       if StrToInt(ID.Text)=pole[i].kod then
       begin
         z:=true;
-        if StrToInT(predaj.Text)>0 then
+        if StrTofloat(predaj.Text)>0 then
         begin
-          pole[i].predaj:=pole[i].predaj+predaj.Text;
+          pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
           ReWrite(cena);
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
-            StringGrid1.Cells[3,k+1]:=pole[k].predaj;
+            StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
           CloseFile(cena);
 
@@ -250,10 +256,15 @@ begin
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
-  WriteLn(cena,pole[k].kod,';',pole[k].nakup,';',pole[k].predaj,';');
+  WriteLn(cena,pole[k].kod,';',floattostr(pole[k].nakup),';',floattostr(pole[k].predaj),';');
 end;
 end;
 CloseFile(cena);
+end;
+
+procedure TForm1.AhojChange(Sender: TObject);
+begin
+
 end;
 
 

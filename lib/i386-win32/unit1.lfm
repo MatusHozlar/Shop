@@ -9,10 +9,10 @@ object Form1: TForm1
   OnCreate = FormCreate
   LCLVersion = '1.8.0.6'
   object StringGrid1: TStringGrid
-    Left = 32
-    Height = 104
+    Left = 24
+    Height = 152
     Top = 16
-    Width = 272
+    Width = 256
     TabOrder = 1
     Cells = (
       4
@@ -30,65 +30,30 @@ object Form1: TForm1
       'Predaj'
     )
   end
-  object Memo1: TMemo
-    Left = 416
-    Height = 90
-    Top = 53
-    Width = 150
-    Lines.Strings = (
-      'Memo1'
-    )
+  object ID: TEdit
+    Left = 22
+    Height = 23
+    Top = 200
+    Width = 80
     TabOrder = 2
   end
-  object Memo2: TMemo
-    Left = 416
-    Height = 90
-    Top = 152
-    Width = 150
-    Lines.Strings = (
-      'Memo2'
-    )
-    TabOrder = 3
-  end
-  object ID: TEdit
-    Left = 24
-    Height = 23
-    Top = 200
-    Width = 80
-    TabOrder = 4
-  end
-  object Pocet: TEdit
-    Left = 128
-    Height = 23
-    Top = 200
-    Width = 80
-    TabOrder = 5
-  end
-  object predaj: TEdit
-    Left = 232
-    Height = 23
-    Top = 200
-    Width = 80
-    OnChange = predajChange
-    TabOrder = 6
-  end
   object Button1: TButton
-    Left = 80
+    Left = 64
     Height = 25
-    Top = 240
+    Top = 232
     Width = 99
     Caption = 'Vloz do tabulky'
     OnClick = Button1Click
     TabOrder = 0
   end
   object Button2: TButton
-    Left = 224
+    Left = 192
     Height = 25
-    Top = 240
+    Top = 232
     Width = 75
     Caption = 'Ulozit zmeny'
     OnClick = Button2Click
-    TabOrder = 7
+    TabOrder = 3
   end
   object Label1: TLabel
     Left = 22
@@ -113,5 +78,30 @@ object Form1: TForm1
     Width = 34
     Caption = 'Label3'
     ParentColor = False
+  end
+  object pocet: TFloatSpinEdit
+    Left = 128
+    Height = 23
+    Top = 200
+    Width = 90
+    Increment = 1
+    MaxValue = 100
+    MinValue = 0
+    OnChange = pocetChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+    Value = 0
+  end
+  object predaj: TFloatSpinEdit
+    Left = 232
+    Height = 23
+    Top = 200
+    Width = 84
+    Increment = 1
+    MaxValue = 100
+    MinValue = 0
+    TabOrder = 5
+    Value = 0
   end
 end
