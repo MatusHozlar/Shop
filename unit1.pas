@@ -249,7 +249,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte kladne cislo');
+          ShowMessage('Zadajte nakupnu cenu');
       end;
     end;
   end;
@@ -309,7 +309,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte cenu');
+          ShowMessage('Zadajte predajnu cenu');
       end;
     end;
   end;
@@ -332,6 +332,7 @@ begin
 end;
 end;
 CloseFile(cena);
+ShowMessage('Zmeny boli ulozene!');
 end;
 
 procedure TCenotvorba.AhojChange(Sender: TObject);
