@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Math, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ValEdit, ComCtrls, Grids, ExtCtrls, Spin, EditBtn;
+  ComCtrls, Grids, ExtCtrls, Spin, EditBtn;
 
 type
 
@@ -71,7 +71,7 @@ implementation
 { TForm1 }
 
 procedure TForm1.FormCreate(Sender: TObject);
-var i,z,k:integer;c:char;cislo,price,namee:string;
+var i,k:integer;c:char;cislo:string;
 begin
 AssignFile(sklad,'tovar.txt');
 AssignFile(cena,'cennik.txt');
@@ -84,8 +84,6 @@ Label4.Caption:='Vymazat nakupnu/predajnu cenu zvoleneho produktu';
 //nacitanie suborov
 
 cislo:='';
-price:='';
-namee:='';
   AssignFile(sklad,'tovar.txt');
   AssignFile(cena,'cennik.txt');
   editcennik:=FileAge('CENNIK.txt');
@@ -143,7 +141,7 @@ begin
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
-var i,z,k:integer;c:char;cislo,price,namee:string;
+var i,k:integer;c:char;cislo:string;
 begin
 
 if aktual=true then
@@ -154,8 +152,6 @@ if aktual=true then
 //nacitanie suborov
 
 cislo:='';
-price:='';
-namee:='';
   prikaz:=0;
 
 begin
@@ -322,7 +318,7 @@ until (z=true) or (i=riadky);
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
-var k,i:integer;
+var k:integer;
 begin
 kontrola;
 k:=0;
@@ -497,7 +493,7 @@ repeat
 
     end
     else
-      ShowMessage('Zadajte kladne cislo');
+      ShowMessage('Zadajte cenu');
   end
   else
   begin
@@ -527,7 +523,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte kladne cislo');
+          ShowMessage('Pre potvrdenie zadajte lubovolnu hodnotu do policka nakupna cena');
       end;
     end;
   end;
@@ -589,7 +585,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte cenu');
+          ShowMessage('Pre potvrdenie zadajte lubovolnu hodnotu do policka predajna cena');
       end;
     end;
   end;
