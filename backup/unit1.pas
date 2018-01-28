@@ -71,7 +71,7 @@ implementation
 { TForm1 }
 
 procedure TForm1.FormCreate(Sender: TObject);
-var i,z,k:integer;c:char;cislo:string;
+var i,k:integer;c:char;cislo:string;
 begin
 AssignFile(sklad,'tovar.txt');
 AssignFile(cena,'cennik.txt');

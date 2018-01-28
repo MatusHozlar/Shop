@@ -10,9 +10,9 @@ uses
 
 type
 
-  { TForm1 }
+  { TCenotvorba }
 
-  TForm1 = class(TForm)
+  TCenotvorba = class(TForm)
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
@@ -58,7 +58,7 @@ type
   const
   path='';  //\\comenius\public\market\timb\
 var
-  Form1: TForm1;
+  Cenotvorba: TCenotvorba;
   sklad,cena,tovar,transakcia,statistiky:textfile;
   pole:array of hodnoty;
   riadky,prikaz:integer;
@@ -68,9 +68,9 @@ implementation
 
 {$R *.lfm}
 
-{ TForm1 }
+{ TCenotvorba }
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TCenotvorba.FormCreate(Sender: TObject);
 var i,k:integer;c:char;cislo:string;
 begin
 AssignFile(sklad,'tovar.txt');
@@ -125,22 +125,22 @@ Reset(sklad);
   CloseFile(sklad);
 end;
 end;
-procedure TForm1.pocetChange(Sender: TObject);
+procedure TCenotvorba.pocetChange(Sender: TObject);
 begin
 
 end;
 
-procedure TForm1.predajChange(Sender: TObject);
+procedure TCenotvorba.predajChange(Sender: TObject);
 begin
 
 end;
 
-procedure TForm1.predajClick(Sender: TObject);
+procedure TCenotvorba.predajClick(Sender: TObject);
 begin
 
 end;
 
-procedure TForm1.Timer1Timer(Sender: TObject);
+procedure TCenotvorba.Timer1Timer(Sender: TObject);
 var i,k:integer;c:char;cislo:string;
 begin
 
@@ -191,7 +191,7 @@ end;
 
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TCenotvorba.Button1Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
   kontrola;
@@ -317,7 +317,7 @@ repeat
 until (z=true) or (i=riadky);
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TCenotvorba.Button2Click(Sender: TObject);
 var k:integer;
 begin
 kontrola;
@@ -334,12 +334,12 @@ end;
 CloseFile(cena);
 end;
 
-procedure TForm1.AhojChange(Sender: TObject);
+procedure TCenotvorba.AhojChange(Sender: TObject);
 begin
 
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);
+procedure TCenotvorba.Button3Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
   kontrola;
@@ -407,7 +407,7 @@ if z=false then
 aktual:=true;
 end;
 
-procedure TForm1.Button4Click(Sender: TObject);
+procedure TCenotvorba.Button4Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
 kontrola;
@@ -466,7 +466,7 @@ repeat
 until (z=true) or (i=riadky);
 end;
 
-procedure TForm1.Button5Click(Sender: TObject);
+procedure TCenotvorba.Button5Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
   kontrola;
@@ -534,7 +534,7 @@ if z=false then
 aktual:=true;
 end;
 
-procedure TForm1.Button6Click(Sender: TObject);
+procedure TCenotvorba.Button6Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
 kontrola;
@@ -593,12 +593,12 @@ repeat
 until (z=true) or (i=riadky);
 end;
 
-procedure TForm1.delete(Sender: TObject);
+procedure TCenotvorba.delete(Sender: TObject);
 begin
 
 end;
 
-procedure TForm1.Kontrola;
+procedure TCenotvorba.Kontrola;
 var lock:boolean;
     F1,F2,F3:integer;
    begin

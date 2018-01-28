@@ -1,9 +1,9 @@
-object Form1: TForm1
+object Cenotvorba: TCenotvorba
   Left = 325
   Height = 322
   Top = 151
   Width = 640
-  Caption = 'Form1'
+  Caption = 'Cenotvorba'
   ClientHeight = 322
   ClientWidth = 640
   OnCreate = FormCreate
