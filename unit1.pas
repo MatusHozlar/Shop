@@ -17,6 +17,9 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
+    Label4: TLabel;
     pocet: TFloatSpinEdit;
     predaj: TFloatSpinEdit;
     Label1: TLabel;
@@ -30,11 +33,15 @@ type
     procedure AhojChange(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure delete(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pocetChange(Sender: TObject);
     procedure predajChange(Sender: TObject);
     procedure predajClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure Kontrola;
   private
 
   public
@@ -48,12 +55,15 @@ type
     nakup:float;
     predaj:float;
   end;
+  const
+  path='';  //\\comenius\public\market\timb\
 var
   Form1: TForm1;
   sklad,cena,tovar,transakcia,statistiky:textfile;
   pole:array of hodnoty;
   riadky,prikaz:integer;
   aktual:boolean;
+  editcennik,edittovar:LongInt;
 implementation
 
 {$R *.lfm}
@@ -63,10 +73,13 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 var i,z,k:integer;c:char;cislo,price,namee:string;
 begin
+AssignFile(sklad,'tovar.txt');
+AssignFile(cena,'cennik.txt');
 ShowMessage('Program je iba v Alpha stadiu riesenia - niektore funkcie nemusia fungovat spravne!' );
 Label1.Caption:='ID produktu';
 Label2.Caption:='Nakupna cena';
 label3.Caption:='Predajna cena';
+Label4.Caption:='Vymazat nakupnu/predajnu cenu zvoleneho produktu';
 
 //nacitanie suborov
 
@@ -75,6 +88,8 @@ price:='';
 namee:='';
   AssignFile(sklad,'tovar.txt');
   AssignFile(cena,'cennik.txt');
+  editcennik:=FileAge('CENNIK.txt');
+  edittovar:=FileAge('TOVAR.txt');
   prikaz:=0;
 
 begin
@@ -112,7 +127,6 @@ Reset(sklad);
   CloseFile(sklad);
 end;
 end;
-
 procedure TForm1.pocetChange(Sender: TObject);
 begin
 
@@ -131,13 +145,17 @@ end;
 procedure TForm1.Timer1Timer(Sender: TObject);
 var i,z,k:integer;c:char;cislo,price,namee:string;
 begin
+
+if aktual=true then
+    Kontrola;
+
+
+
 //nacitanie suborov
 
 cislo:='';
 price:='';
 namee:='';
-  AssignFile(sklad,'tovar.txt');
-  AssignFile(cena,'cennik.txt');
   prikaz:=0;
 
 begin
@@ -180,7 +198,7 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
-
+  kontrola;
 //Nakupna cena
 
 aktual:=false;
@@ -201,6 +219,7 @@ repeat
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
       end;
       CloseFile(cena);
+      CloseFile(sklad);
 
     end
     else
@@ -262,6 +281,7 @@ repeat
       for k:=0 to riadky-1 do
 
       CloseFile(cena);
+      CloseFile(sklad);
     end
     else
       ShowMessage('Zadajte kladne cislo');
@@ -304,6 +324,7 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 var k,i:integer;
 begin
+kontrola;
 k:=0;
 begin
      Reset(cena);
@@ -325,7 +346,7 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
-
+  kontrola;
 //Nakupna cena
 
 aktual:=false;
@@ -393,6 +414,7 @@ end;
 procedure TForm1.Button4Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
+kontrola;
   aktual:=false;
 z:=false;
 i:=0;
@@ -448,5 +470,158 @@ repeat
 until (z=true) or (i=riadky);
 end;
 
+procedure TForm1.Button5Click(Sender: TObject);
+var z,cisla:boolean;i,k:integer;
+begin
+  kontrola;
+//Nakupna cena
+
+aktual:=false;
+z:=false;
+i:=0;
+repeat
+  cisla:=true;
+  if (ID.Text = pole[i].nazov) then
+  begin
+    z:=true;
+    if StrToInT(Pocet.Text)>0 then
+    begin
+      pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
+      ReWrite(cena);
+      WriteLn(cena,riadky);
+      for k:=0 to riadky-1 do
+      begin
+        WriteLn(cena,pole[k].kod,';',pole[k].nakup);
+      end;
+      CloseFile(cena);
+
+    end
+    else
+      ShowMessage('Zadajte kladne cislo');
+  end
+  else
+  begin
+    for k:=1 to length(ID.Text) do
+    begin
+      if (ID.Text[k] < '0') or (ID.Text[k] > '9') then
+      begin
+        cisla:=false;
+      end;
+    end;
+    if cisla=true then
+    begin
+      if StrToInt(ID.Text)=pole[i].kod then
+      begin
+        z:=true;
+        if strtofloat(Pocet.Text)>0 then
+        begin
+          pole[i].nakup:=0;
+          ReWrite(cena);
+          WriteLn(cena,riadky);
+          for k:=0 to riadky-1 do
+          begin
+            StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
+          end;
+          CloseFile(cena);
+
+
+        end
+        else
+          ShowMessage('Zadajte kladne cislo');
+      end;
+    end;
+  end;
+  inc(i);
+until (z=true) or (i=riadky);
+if z=false then
+  ShowMessage('Zadajte kod produktu nie je v databaze');
+aktual:=true;
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+var z,cisla:boolean;i,k:integer;
+begin
+kontrola;
+  aktual:=false;
+z:=false;
+i:=0;
+repeat
+  cisla:=true;
+  if (ID.Text = pole[i].nazov) then
+  begin
+    z:=true;
+    if StrToint(predaj.Text)>0 then
+    begin
+      pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
+      ReWrite(cena);
+      WriteLn(cena,riadky);
+      for k:=0 to riadky-1 do
+
+      CloseFile(cena);
+    end
+    else
+      ShowMessage('Zadajte kladne cislo');
+  end
+  else
+  begin
+    for k:=1 to length(ID.Text) do
+    begin
+      if (ID.Text[k] < '0') or (ID.Text[k] > '9') then
+      begin
+        cisla:=false;
+      end;
+    end;
+    if cisla=true then
+    begin
+      if StrToInt(ID.Text)=pole[i].kod then
+      begin
+        z:=true;
+        if StrTofloat(predaj.Text)>0 then
+        begin
+          pole[i].predaj:=0;
+          ReWrite(cena);
+          WriteLn(cena,riadky);
+          for k:=0 to riadky-1 do
+          begin
+            StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
+          end;
+          CloseFile(cena);
+
+        end
+        else
+          ShowMessage('Zadajte kladné množstvo tovaru');
+      end;
+    end;
+  end;
+  inc(i);
+until (z=true) or (i=riadky);
+end;
+
+procedure TForm1.delete(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.Kontrola;
+var lock:boolean;
+    F1,F2,F3:integer;
+   begin
+   if (FileExists(path+'Tovar.txt')=true) and (FileExists(path+'CENNIK.txt')=true) and (FileExists(path+'TOVAR.txt')=true) then
+   begin
+   if not (FileExists(path+'SKLAD_LOCK.txt')=true) or (FileExists(path+'CENNIK_LOCK.txt')=true) or (FileExists(path+'TOVAR_LOCK.txt')=true) then
+   begin
+   //LOCKOVANIE
+   F2:=FileCreate(path+'CENNIK_LOCK.txt');
+   F3:=FileCreate(path+'TOVAR_LOCK.txt');
+
+     //DELETE LOCKU
+     FileClose(F2);
+     DeleteFile(path+'cennik_LOCK.txt');
+     FileClose(F3);
+     DeleteFile(path+'tovar_LOCK.txt');
+
+end;
+   end;
+   end;
 end.
 
