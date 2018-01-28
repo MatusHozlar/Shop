@@ -39,18 +39,18 @@ object Form1: TForm1
     Text = '0'
   end
   object Button1: TButton
-    Left = 440
-    Height = 25
-    Top = 272
+    Left = 536
+    Height = 26
+    Top = 88
     Width = 99
-    Caption = 'Pridaj spolu'
+    Caption = 'Pridaj obe ceny'
     OnClick = Button1Click
     TabOrder = 0
   end
   object Button2: TButton
     Left = 552
     Height = 25
-    Top = 272
+    Top = 280
     Width = 75
     Caption = 'Ulozit zmeny'
     OnClick = Button2Click
@@ -65,25 +65,25 @@ object Form1: TForm1
     ParentColor = False
   end
   object Label2: TLabel
-    Left = 429
+    Left = 320
     Height = 15
-    Top = 8
+    Top = 66
     Width = 34
     Caption = 'Label2'
     ParentColor = False
   end
   object Label3: TLabel
-    Left = 552
+    Left = 440
     Height = 15
-    Top = 8
+    Top = 66
     Width = 34
     Caption = 'Label3'
     ParentColor = False
   end
   object pocet: TFloatSpinEdit
-    Left = 429
+    Left = 320
     Height = 23
-    Top = 24
+    Top = 88
     Width = 90
     Increment = 1
     MaxValue = 999999
@@ -95,9 +95,9 @@ object Form1: TForm1
     Value = 0
   end
   object predaj: TFloatSpinEdit
-    Left = 552
+    Left = 440
     Height = 23
-    Top = 24
+    Top = 88
     Width = 84
     Increment = 1
     MaxValue = 999999
@@ -107,27 +107,27 @@ object Form1: TForm1
     Value = 0
   end
   object Button3: TButton
-    Left = 429
+    Left = 320
     Height = 25
-    Top = 56
+    Top = 120
     Width = 75
     Caption = 'Pridaj cenu'
     OnClick = Button3Click
     TabOrder = 6
   end
   object Button4: TButton
-    Left = 552
+    Left = 440
     Height = 25
-    Top = 56
+    Top = 120
     Width = 75
     Caption = 'Pridaj cenu'
     OnClick = Button4Click
     TabOrder = 7
   end
   object Button5: TButton
-    Left = 312
+    Left = 320
     Height = 25
-    Top = 120
+    Top = 184
     Width = 131
     Caption = 'Vymaz nakupnu cenu'
     OnClick = Button5Click
@@ -136,16 +136,16 @@ object Form1: TForm1
   object Button6: TButton
     Left = 480
     Height = 25
-    Top = 120
+    Top = 184
     Width = 131
     Caption = 'Vymaz predajnu cenu'
     OnClick = Button6Click
     TabOrder = 9
   end
   object Label4: TLabel
-    Left = 313
+    Left = 320
     Height = 15
-    Top = 104
+    Top = 168
     Width = 34
     Caption = 'Label4'
     ParentColor = False

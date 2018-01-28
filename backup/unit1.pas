@@ -484,7 +484,7 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToInT(Pocet.Text)>0 then
+    if StrToInT(Pocet.Text)>=0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
       ReWrite(cena);
@@ -550,7 +550,7 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToint(predaj.Text)>0 then
+    if StrToint(predaj.Text)>=0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
       ReWrite(cena);

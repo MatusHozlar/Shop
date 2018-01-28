@@ -75,7 +75,7 @@ var i,z,k:integer;c:char;cislo,price,namee:string;
 begin
 AssignFile(sklad,'tovar.txt');
 AssignFile(cena,'cennik.txt');
-ShowMessage('Program je iba v Alpha stadiu riesenia - niektore funkcie nemusia fungovat spravne!' );
+{ShowMessage('Program je iba v Alpha stadiu riesenia - niektore funkcie nemusia fungovat spravne!' );}
 Label1.Caption:='ID produktu';
 Label2.Caption:='Nakupna cena';
 label3.Caption:='Predajna cena';
@@ -223,7 +223,7 @@ repeat
 
     end
     else
-      ShowMessage('Zadajte kladne cislo');
+      ShowMessage('Zadajte cenu');
   end
   else
   begin
@@ -260,7 +260,7 @@ repeat
   inc(i);
 until (z=true) or (i=riadky);
 if z=false then
-  ShowMessage('Zadajte kod produktu nie je v databaze');
+  ShowMessage('Zadany kod produktu nie je v databaze');
 aktual:=true;
 
 //predajna cena
@@ -284,7 +284,7 @@ repeat
       CloseFile(sklad);
     end
     else
-      ShowMessage('Zadajte kladne cislo');
+      ShowMessage('Zadajte cenu');
   end
   else
   begin
@@ -313,7 +313,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte kladné množstvo tovaru');
+          ShowMessage('Zadajte cenu');
       end;
     end;
   end;
@@ -370,7 +370,7 @@ repeat
 
     end
     else
-      ShowMessage('Zadajte kladne cislo');
+      ShowMessage('Zadajte cenu');
   end
   else
   begin
@@ -400,14 +400,14 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte kladne cislo');
+          ShowMessage('Zadajte cenu');
       end;
     end;
   end;
   inc(i);
 until (z=true) or (i=riadky);
 if z=false then
-  ShowMessage('Zadajte kod produktu nie je v databaze');
+  ShowMessage('Zadany kod produktu nie je v databaze');
 aktual:=true;
 end;
 
@@ -433,7 +433,7 @@ repeat
       CloseFile(cena);
     end
     else
-      ShowMessage('Zadajte kladne cislo');
+      ShowMessage('Zadajte cenu');
   end
   else
   begin
@@ -462,7 +462,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte kladné množstvo tovaru');
+          ShowMessage('Zadajte cenu');
       end;
     end;
   end;
@@ -484,7 +484,7 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToInT(Pocet.Text)>0 then
+    if StrToInT(Pocet.Text)>=0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
       ReWrite(cena);
@@ -534,7 +534,7 @@ repeat
   inc(i);
 until (z=true) or (i=riadky);
 if z=false then
-  ShowMessage('Zadajte kod produktu nie je v databaze');
+  ShowMessage('Zadany kod produktu nie je v databaze');
 aktual:=true;
 end;
 
@@ -550,7 +550,7 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToint(predaj.Text)>0 then
+    if StrToint(predaj.Text)>=0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
       ReWrite(cena);
@@ -560,7 +560,7 @@ repeat
       CloseFile(cena);
     end
     else
-      ShowMessage('Zadajte kladne cislo');
+      ShowMessage('Zadajte cenu');
   end
   else
   begin
@@ -589,7 +589,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte kladné množstvo tovaru');
+          ShowMessage('Zadajte cenu');
       end;
     end;
   end;
