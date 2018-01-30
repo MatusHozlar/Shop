@@ -56,7 +56,7 @@ type
     predaj:float;
   end;
   const
-  path='';  //\\comenius\public\market\timb\
+  path=''; //\\comenius\public\market\tima\
 var
   Cenotvorba: TCenotvorba;
   sklad,cena,tovar,transakcia,statistiky:textfile;
@@ -72,7 +72,9 @@ implementation
 
 procedure TCenotvorba.FormCreate(Sender: TObject);
 var i,k:integer;c:char;cislo:string;
+    DefaultFormatSettings: TFormatSettings;
 begin
+DecimalSeparator:='.';
 AssignFile(sklad,'tovar.txt');
 AssignFile(cena,'cennik.txt');
 {ShowMessage('Program je iba v Alpha stadiu riesenia - niektore funkcie nemusia fungovat spravne!' );}
@@ -84,10 +86,10 @@ Label4.Caption:='Vymazat nakupnu/predajnu cenu zvoleneho produktu';
 //nacitanie suborov
 
 cislo:='';
-  AssignFile(sklad,'tovar.txt');
-  AssignFile(cena,'cennik.txt');
-  editcennik:=FileAge('CENNIK.txt');
-  edittovar:=FileAge('TOVAR.txt');
+  AssignFile(sklad,path+'tovar.txt');
+  AssignFile(cena,path+'cennik.txt');
+  editcennik:=FileAge(path+'CENNIK.txt');
+  edittovar:=FileAge(path+'TOVAR.txt');
   prikaz:=0;
 
 begin
@@ -319,6 +321,7 @@ end;
 
 procedure TCenotvorba.Button2Click(Sender: TObject);
 var k:integer;
+  before,after: string;
 begin
 kontrola;
 k:=0;
@@ -328,6 +331,8 @@ begin
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
+    //before:=floattostr(pole[k].nakup);
+    //after:= StringReplace(before, ',','.',[rfReplaceAll, rfIgnoreCase]);
   WriteLn(cena,pole[k].kod,';',floattostr(pole[k].nakup),';',floattostr(pole[k].predaj),';');
 end;
 end;
@@ -342,6 +347,7 @@ end;
 
 procedure TCenotvorba.Button3Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
+  before,after: string;
 begin
   kontrola;
 //Nakupna cena
@@ -410,6 +416,7 @@ end;
 
 procedure TCenotvorba.Button4Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
+  before,after:string;
 begin
 kontrola;
   aktual:=false;
