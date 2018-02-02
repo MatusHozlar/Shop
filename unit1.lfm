@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 object Cenotvorba: TCenotvorba
   Left = 254
   Height = 322
@@ -155,3 +156,162 @@ object Cenotvorba: TCenotvorba
     top = 245
   end
 end
+=======
+object Cenotvorba: TCenotvorba
+  Left = 460
+  Height = 322
+  Top = 164
+  Width = 640
+  Caption = 'Cenotvorba'
+  ClientHeight = 322
+  ClientWidth = 640
+  OnCreate = FormCreate
+  LCLVersion = '1.4.0.4'
+  object StringGrid1: TStringGrid
+    Left = 24
+    Height = 312
+    Top = 8
+    Width = 256
+    TabOrder = 1
+    Cells = (
+      4
+      0
+      0
+      'ID'
+      1
+      0
+      'Nazov'
+      2
+      0
+      'Nakup'
+      3
+      0
+      'Predaj'
+    )
+  end
+  object ID: TEdit
+    Left = 320
+    Height = 23
+    Top = 24
+    Width = 80
+    TabOrder = 2
+    Text = '0'
+  end
+  object Button1: TButton
+    Left = 536
+    Height = 26
+    Top = 88
+    Width = 99
+    Caption = 'Pridaj obe ceny'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 552
+    Height = 25
+    Top = 280
+    Width = 75
+    Caption = 'Ulozit zmeny'
+    OnClick = Button2Click
+    TabOrder = 3
+  end
+  object Label1: TLabel
+    Left = 320
+    Height = 15
+    Top = 8
+    Width = 34
+    Caption = 'Label1'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 320
+    Height = 15
+    Top = 66
+    Width = 34
+    Caption = 'Label2'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 440
+    Height = 15
+    Top = 66
+    Width = 34
+    Caption = 'Label3'
+    ParentColor = False
+  end
+  object pocet: TFloatSpinEdit
+    Left = 320
+    Height = 23
+    Top = 88
+    Width = 90
+    Increment = 1
+    MaxValue = 999999
+    MinValue = 0
+    OnChange = pocetChange
+    TabOrder = 4
+    Value = 0
+  end
+  object predaj: TFloatSpinEdit
+    Left = 440
+    Height = 23
+    Top = 88
+    Width = 84
+    Increment = 1
+    MaxValue = 999999
+    MinValue = 0
+    OnChange = predajChange
+    TabOrder = 5
+    Value = 0
+  end
+  object Button3: TButton
+    Left = 320
+    Height = 25
+    Top = 120
+    Width = 75
+    Caption = 'Pridaj cenu'
+    OnClick = Button3Click
+    TabOrder = 6
+  end
+  object Button4: TButton
+    Left = 440
+    Height = 25
+    Top = 120
+    Width = 75
+    Caption = 'Pridaj cenu'
+    OnClick = Button4Click
+    TabOrder = 7
+  end
+  object Button5: TButton
+    Left = 320
+    Height = 25
+    Top = 184
+    Width = 131
+    Caption = 'Vymaz nakupnu cenu'
+    OnClick = Button5Click
+    TabOrder = 8
+  end
+  object Button6: TButton
+    Left = 480
+    Height = 25
+    Top = 184
+    Width = 131
+    Caption = 'Vymaz predajnu cenu'
+    OnClick = Button6Click
+    TabOrder = 9
+  end
+  object Label4: TLabel
+    Left = 320
+    Height = 15
+    Top = 168
+    Width = 34
+    Caption = 'Label4'
+    ParentColor = False
+  end
+  object Timer1: TTimer
+    Interval = 5000
+    OnTimer = Timer1Timer
+    left = 331
+    top = 245
+  end
+end
+>>>>>>> b17432b9b3af5bde25d062644f8d420ba06e27d2
