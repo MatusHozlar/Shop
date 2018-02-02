@@ -1,13 +1,13 @@
 object Cenotvorba: TCenotvorba
-  Left = 254
+  Left = 460
   Height = 322
-  Top = 156
+  Top = 164
   Width = 640
   Caption = 'Cenotvorba'
   ClientHeight = 322
   ClientWidth = 640
   OnCreate = FormCreate
-  LCLVersion = '1.8.0.6'
+  LCLVersion = '1.4.0.4'
   object StringGrid1: TStringGrid
     Left = 24
     Height = 312

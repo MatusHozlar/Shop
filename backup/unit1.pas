@@ -333,7 +333,7 @@ begin
           begin
     //before:=floattostr(pole[k].nakup);
     //after:= StringReplace(before, ',','.',[rfReplaceAll, rfIgnoreCase]);
-  WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2),';');
+  WriteLn(cena,pole[k].kod,';',floattostr(pole[k].nakup),';',floattostr(pole[k].predaj),';');
 end;
 end;
 CloseFile(cena);
@@ -363,6 +363,8 @@ repeat
     if StrToInT(Pocet.Text)>0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
+      ReWrite(cena);
+      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
@@ -390,11 +392,13 @@ repeat
         if strtofloat(Pocet.Text)>0 then
         begin
           pole[i].nakup:=pole[i].nakup+strtofloat(Pocet.text);
+          ReWrite(cena);
+          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-          //CloseFile(cena);
+          CloseFile(cena);
 
 
         end
