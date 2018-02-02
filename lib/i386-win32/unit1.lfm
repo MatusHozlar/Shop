@@ -1,7 +1,7 @@
 object Cenotvorba: TCenotvorba
-  Left = 325
+  Left = 296
   Height = 322
-  Top = 151
+  Top = 144
   Width = 640
   Caption = 'Cenotvorba'
   ClientHeight = 322
@@ -13,6 +13,7 @@ object Cenotvorba: TCenotvorba
     Height = 312
     Top = 8
     Width = 256
+    FixedCols = 0
     TabOrder = 1
     Cells = (
       4

@@ -56,7 +56,7 @@ type
     predaj:float;
   end;
   const
-  path=''; //\\comenius\public\market\tima\
+  path='';  //\\comenius\public\market\timb\
 var
   Cenotvorba: TCenotvorba;
   sklad,cena,tovar,transakcia,statistiky:textfile;
@@ -72,7 +72,6 @@ implementation
 
 procedure TCenotvorba.FormCreate(Sender: TObject);
 var i,k:integer;c:char;cislo:string;
-    DefaultFormatSettings: TFormatSettings;
 begin
 DecimalSeparator:='.';
 AssignFile(sklad,'tovar.txt');
@@ -86,10 +85,10 @@ Label4.Caption:='Vymazat nakupnu/predajnu cenu zvoleneho produktu';
 //nacitanie suborov
 
 cislo:='';
-  AssignFile(sklad,path+'tovar.txt');
-  AssignFile(cena,path+'cennik.txt');
-  editcennik:=FileAge(path+'CENNIK.txt');
-  edittovar:=FileAge(path+'TOVAR.txt');
+  AssignFile(sklad,'tovar.txt');
+  AssignFile(cena,'cennik.txt');
+  editcennik:=FileAge('CENNIK.txt');
+  edittovar:=FileAge('TOVAR.txt');
   prikaz:=0;
 
 begin
@@ -209,7 +208,7 @@ repeat
     z:=true;
     if StrToINT(Pocet.Text)>0 then
     begin
-      pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
+      pole[i].nakup:=strtofloat(pocet.text);
       ReWrite(cena);
       WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
@@ -321,7 +320,6 @@ end;
 
 procedure TCenotvorba.Button2Click(Sender: TObject);
 var k:integer;
-  before,after: string;
 begin
 kontrola;
 k:=0;
@@ -331,10 +329,9 @@ begin
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
-    //before:=floattostr(pole[k].nakup);
-    //after:= StringReplace(before, ',','.',[rfReplaceAll, rfIgnoreCase]);
-  WriteLn(cena,pole[k].kod,';',floattostr(pole[k].nakup),';',floattostr(pole[k].predaj),';');
+  WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2),';');
 end;
+
 end;
 CloseFile(cena);
 ShowMessage('Zmeny boli ulozene!');
@@ -347,7 +344,6 @@ end;
 
 procedure TCenotvorba.Button3Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
-  before,after: string;
 begin
   kontrola;
 //Nakupna cena
@@ -360,7 +356,7 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToInT(Pocet.Text)>0 then
+    if StrToFloat(Pocet.Text)>0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
       ReWrite(cena);
@@ -368,6 +364,7 @@ repeat
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
+        StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
       end;
       CloseFile(cena);
 
@@ -416,7 +413,6 @@ end;
 
 procedure TCenotvorba.Button4Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
-  before,after:string;
 begin
 kontrola;
   aktual:=false;
@@ -615,8 +611,8 @@ var lock:boolean;
    if not (FileExists(path+'SKLAD_LOCK.txt')=true) or (FileExists(path+'CENNIK_LOCK.txt')=true) or (FileExists(path+'TOVAR_LOCK.txt')=true) then
    begin
    //LOCKOVANIE
-   F2:=FileCreate(path+'CENNIK_LOCK.txt');
-   F3:=FileCreate(path+'TOVAR_LOCK.txt');
+   //F2:=FileCreate(path+'CENNIK_LOCK.txt');
+   //F3:=FileCreate(path+'TOVAR_LOCK.txt');
 
      //DELETE LOCKU
      FileClose(F2);
