@@ -1,7 +1,7 @@
 object Cenotvorba: TCenotvorba
-  Left = 325
+  Left = 254
   Height = 322
-  Top = 151
+  Top = 156
   Width = 640
   Caption = 'Cenotvorba'
   ClientHeight = 322
@@ -89,8 +89,6 @@ object Cenotvorba: TCenotvorba
     MaxValue = 999999
     MinValue = 0
     OnChange = pocetChange
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 4
     Value = 0
   end
@@ -151,6 +149,7 @@ object Cenotvorba: TCenotvorba
     ParentColor = False
   end
   object Timer1: TTimer
+    Interval = 5000
     OnTimer = Timer1Timer
     left = 331
     top = 245

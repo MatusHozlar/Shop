@@ -56,7 +56,7 @@ type
     predaj:float;
   end;
   const
-  path='';  //\\comenius\public\market\timb\
+  path=''; //\\comenius\public\market\tima\
 var
   Cenotvorba: TCenotvorba;
   sklad,cena,tovar,transakcia,statistiky:textfile;
@@ -72,7 +72,9 @@ implementation
 
 procedure TCenotvorba.FormCreate(Sender: TObject);
 var i,k:integer;c:char;cislo:string;
+    DefaultFormatSettings: TFormatSettings;
 begin
+DecimalSeparator:='.';
 AssignFile(sklad,'tovar.txt');
 AssignFile(cena,'cennik.txt');
 {ShowMessage('Program je iba v Alpha stadiu riesenia - niektore funkcie nemusia fungovat spravne!' );}
@@ -84,10 +86,10 @@ Label4.Caption:='Vymazat nakupnu/predajnu cenu zvoleneho produktu';
 //nacitanie suborov
 
 cislo:='';
-  AssignFile(sklad,'tovar.txt');
-  AssignFile(cena,'cennik.txt');
-  editcennik:=FileAge('CENNIK.txt');
-  edittovar:=FileAge('TOVAR.txt');
+  AssignFile(sklad,path+'tovar.txt');
+  AssignFile(cena,path+'cennik.txt');
+  editcennik:=FileAge(path+'CENNIK.txt');
+  edittovar:=FileAge(path+'TOVAR.txt');
   prikaz:=0;
 
 begin
@@ -208,13 +210,11 @@ repeat
     if StrToINT(Pocet.Text)>0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
       end;
-      CloseFile(cena);
+      //CloseFile(cena);
       CloseFile(sklad);
 
     end
@@ -238,13 +238,11 @@ repeat
         if strtofloat(Pocet.Text)>0 then
         begin
           pole[i].nakup:=pole[i].nakup+strtofloat(Pocet.text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-          CloseFile(cena);
+          //CloseFile(cena);
 
 
         end
@@ -272,11 +270,9 @@ repeat
     if StrToint(predaj.Text)>0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
 
-      CloseFile(cena);
+      //CloseFile(cena);
       CloseFile(sklad);
     end
     else
@@ -299,13 +295,11 @@ repeat
         if StrTofloat(predaj.Text)>0 then
         begin
           pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
-          CloseFile(cena);
+          //CloseFile(cena);
 
         end
         else
@@ -319,6 +313,7 @@ end;
 
 procedure TCenotvorba.Button2Click(Sender: TObject);
 var k:integer;
+  before,after: string;
 begin
 kontrola;
 k:=0;
@@ -328,7 +323,9 @@ begin
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
-  WriteLn(cena,pole[k].kod,';',floattostr(pole[k].nakup),';',floattostr(pole[k].predaj),';');
+    //before:=floattostr(pole[k].nakup);
+    //after:= StringReplace(before, ',','.',[rfReplaceAll, rfIgnoreCase]);
+  WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2),';');
 end;
 end;
 CloseFile(cena);
@@ -342,6 +339,7 @@ end;
 
 procedure TCenotvorba.Button3Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
+  before,after: string;
 begin
   kontrola;
 //Nakupna cena
@@ -357,8 +355,6 @@ repeat
     if StrToInT(Pocet.Text)>0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
@@ -386,13 +382,11 @@ repeat
         if strtofloat(Pocet.Text)>0 then
         begin
           pole[i].nakup:=pole[i].nakup+strtofloat(Pocet.text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-          CloseFile(cena);
+          //CloseFile(cena);
 
 
         end
@@ -410,6 +404,7 @@ end;
 
 procedure TCenotvorba.Button4Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
+  before,after:string;
 begin
 kontrola;
   aktual:=false;
@@ -423,8 +418,6 @@ repeat
     if StrToint(predaj.Text)>0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
 
       CloseFile(cena);
@@ -449,13 +442,11 @@ repeat
         if StrTofloat(predaj.Text)>0 then
         begin
           pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
-          CloseFile(cena);
+          //CloseFile(cena);
 
         end
         else
@@ -484,13 +475,11 @@ repeat
     if StrToInT(Pocet.Text)>=0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
       end;
-      CloseFile(cena);
+      //CloseFile(cena);
 
     end
     else
@@ -513,13 +502,11 @@ repeat
         if strtofloat(Pocet.Text)>0 then
         begin
           pole[i].nakup:=0;
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-          CloseFile(cena);
+          //CloseFile(cena);
 
 
         end
@@ -550,8 +537,6 @@ repeat
     if StrToint(predaj.Text)>=0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
 
       CloseFile(cena);
@@ -582,7 +567,7 @@ repeat
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
-          CloseFile(cena);
+          //CloseFile(cena);
 
         end
         else
