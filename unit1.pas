@@ -209,8 +209,6 @@ repeat
     if StrToINT(Pocet.Text)>0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
@@ -239,13 +237,10 @@ repeat
         if strtofloat(Pocet.Text)>0 then
         begin
           pole[i].nakup:=pole[i].nakup+strtofloat(Pocet.text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-          CloseFile(cena);
 
 
         end
@@ -273,11 +268,10 @@ repeat
     if StrToint(predaj.Text)>0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
-
-      CloseFile(cena);
+      begin
+      StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
+      end;
       CloseFile(sklad);
     end
     else
@@ -300,13 +294,10 @@ repeat
         if StrTofloat(predaj.Text)>0 then
         begin
           pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
-          CloseFile(cena);
 
         end
         else
@@ -358,8 +349,6 @@ repeat
     if StrToInT(Pocet.Text)>0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
@@ -387,13 +376,11 @@ repeat
         if strtofloat(Pocet.Text)>0 then
         begin
           pole[i].nakup:=pole[i].nakup+strtofloat(Pocet.text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-          CloseFile(cena);
+          //CloseFile(cena);
 
 
         end
@@ -424,11 +411,10 @@ repeat
     if StrToint(predaj.Text)>0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
-
-      CloseFile(cena);
+      begin
+      StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
+      end;
     end
     else
       ShowMessage('Zadajte cenu');
@@ -450,13 +436,10 @@ repeat
         if StrTofloat(predaj.Text)>0 then
         begin
           pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
-          CloseFile(cena);
 
         end
         else
@@ -485,13 +468,10 @@ repeat
     if StrToInT(Pocet.Text)>=0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
       end;
-      CloseFile(cena);
 
     end
     else
@@ -514,13 +494,10 @@ repeat
         if strtofloat(Pocet.Text)>0 then
         begin
           pole[i].nakup:=0;
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-          CloseFile(cena);
 
 
         end
@@ -551,11 +528,10 @@ repeat
     if StrToint(predaj.Text)>=0 then
     begin
       pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
-      ReWrite(cena);
-      WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
-
-      CloseFile(cena);
+      begin
+      StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
+      end;
     end
     else
       ShowMessage('Zadajte cenu');
@@ -577,13 +553,10 @@ repeat
         if StrTofloat(predaj.Text)>0 then
         begin
           pole[i].predaj:=0;
-          ReWrite(cena);
-          WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
-          CloseFile(cena);
 
         end
         else

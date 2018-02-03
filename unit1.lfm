@@ -1,7 +1,7 @@
 object Cenotvorba: TCenotvorba
-  Left = 325
+  Left = 279
   Height = 322
-  Top = 151
+  Top = 129
   Width = 640
   Caption = 'Cenotvorba'
   ClientHeight = 322
