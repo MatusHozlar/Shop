@@ -216,7 +216,7 @@ repeat
       begin
       StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
       end;
-      ShowMessage('Zadaj (kladnu) cenu');
+      //ShowMessage('Zadaj (kladnu) cenu');
     end
     else
 

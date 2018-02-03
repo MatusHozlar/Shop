@@ -48,7 +48,7 @@ object Cenotvorba: TCenotvorba
   object Button1: TButton
     Left = 536
     Height = 26
-    Hint = 'Prirad nakupnu a predajnu cenu'
+    Hint = 'Prirad nakupnu a predajnu cenu'#13#10'Potrebne vyplnene obe ceny!'
     Top = 88
     Width = 99
     Caption = 'Pridaj obe ceny'
