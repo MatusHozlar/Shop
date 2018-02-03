@@ -195,6 +195,9 @@ end;
 procedure TCenotvorba.Button1Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
+     If ID.text = '' then
+     Showmessage('Zadajte ID / nazov produktu')
+     else
   kontrola;
 //Nakupna cena
 
@@ -230,7 +233,7 @@ repeat
     end;
     if cisla=true then
     begin
-      if StrToInt(ID.Text)=pole[i].kod then
+      if ID.Text=inttostr(pole[i].kod) then
       begin
         z:=true;
         if strtofloat(Pocet.Text)>0 then
@@ -286,7 +289,7 @@ repeat
     end;
     if cisla=true then
     begin
-      if StrToInt(ID.Text)=pole[i].kod then
+      if ID.Text=inttostr(pole[i].kod) then
       begin
         z:=true;
         if StrTofloat(predaj.Text)>0 then
@@ -338,7 +341,9 @@ var z,cisla:boolean;i,k:integer;
 begin
   kontrola;
 //Nakupna cena
-
+If ID.text = '' then
+Showmessage('Zadajte ID / nazov produktu')
+else
 aktual:=false;
 z:=false;
 i:=0;
@@ -369,7 +374,7 @@ repeat
     end;
     if cisla=true then
     begin
-      if StrToInt(ID.Text)=pole[i].kod then
+      if ID.Text=inttostr(pole[i].kod) then
       begin
         z:=true;
         if strtofloat(Pocet.Text)>0 then
@@ -398,6 +403,9 @@ end;
 procedure TCenotvorba.Button4Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
+If ID.text = '' then
+Showmessage('Zadajte ID / nazov produktu')
+else
 kontrola;
   aktual:=false;
 z:=false;
@@ -429,7 +437,7 @@ repeat
     end;
     if cisla=true then
     begin
-      if StrToInt(ID.Text)=pole[i].kod then
+      if ID.Text=inttostr(pole[i].kod) then
       begin
         z:=true;
         if StrTofloat(predaj.Text)>0 then
@@ -458,7 +466,9 @@ var z,cisla:boolean;i,k:integer;
 begin
   kontrola;
 //Nakupna cena
-
+    If ID.text = '' then
+    Showmessage('Zadajte ID / nazov produktu')
+    else
 aktual:=false;
 z:=false;
 i:=0;
@@ -489,7 +499,7 @@ repeat
     end;
     if cisla=true then
     begin
-      if StrToInt(ID.Text)=pole[i].kod then
+      if ID.Text=inttostr(pole[i].kod) then
       begin
         z:=true;
         if strtofloat(Pocet.Text)>0 then
@@ -515,6 +525,9 @@ end;
 procedure TCenotvorba.Button6Click(Sender: TObject);
 var z,cisla:boolean;i,k:integer;
 begin
+  If ID.text = '' then
+  Showmessage('Zadajte ID / nazov produktu')
+  else
 kontrola;
   aktual:=false;
 z:=false;
@@ -524,7 +537,7 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToFloat(predaj.Text)>=0 then
+    if StrToFloat(predaj.Text)>0 then
     begin
       pole[i].predaj:=0;
       for k:=0 to riadky-1 do
@@ -546,7 +559,7 @@ repeat
     end;
     if cisla=true then
     begin
-      if StrToInt(ID.Text)=pole[i].kod then
+      if ID.Text=IntoToStr(pole[i].kod) then
       begin
         z:=true;
         if StrTofloat(predaj.Text)>0 then
