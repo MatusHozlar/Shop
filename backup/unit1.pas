@@ -206,19 +206,18 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToINT(Pocet.Text)>0 then
+    if StrToFloat(Pocet.Text)>0 then
     begin
-      pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
+      pole[i].nakup:=strtofloat(pocet.text);
       for k:=0 to riadky-1 do
       begin
-        WriteLn(cena,pole[k].kod,';',pole[k].nakup);
+      StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
       end;
-      CloseFile(cena);
-      CloseFile(sklad);
-
+      ShowMessage('Zadaj kladnu cenu');
     end
     else
-      ShowMessage('Zadajte cenu');
+
+
   end
   else
   begin
@@ -236,16 +235,16 @@ repeat
         z:=true;
         if strtofloat(Pocet.Text)>0 then
         begin
-          pole[i].nakup:=pole[i].nakup+strtofloat(Pocet.text);
+          pole[i].nakup:=strtofloat(Pocet.text);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-
+           ShowMessage('Zadaj kladnu cenu');
 
         end
         else
-          ShowMessage('Zadajte nakupnu cenu');
+
       end;
     end;
   end;
@@ -265,17 +264,16 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToint(predaj.Text)>0 then
+    if StrToFloat(predaj.Text)>0 then
     begin
-      pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
+      pole[i].predaj:=strtofloat(predaj.Text);
       for k:=0 to riadky-1 do
       begin
       StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
       end;
-      CloseFile(sklad);
     end
     else
-      ShowMessage('Zadajte cenu');
+      ShowMessage('Zadaj kladnu cenu');
   end
   else
   begin
@@ -293,7 +291,7 @@ repeat
         z:=true;
         if StrTofloat(predaj.Text)>0 then
         begin
-          pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
+          pole[i].predaj:=strtofloat(predaj.Text);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
@@ -301,12 +299,15 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte predajnu cenu');
+          ShowMessage('Zadaj kladnu cenu');
       end;
     end;
   end;
   inc(i);
 until (z=true) or (i=riadky);
+if z=false then
+ // ShowMessage('Zadany kod produktu nie je v databaze');
+aktual:=true;
 end;
 
 procedure TCenotvorba.Button2Click(Sender: TObject);
@@ -355,7 +356,7 @@ repeat
       end;
     end
     else
-      ShowMessage('Zadajte cenu');
+      ShowMessage('Zadaj kladnu cenu');
   end
   else
   begin
@@ -383,7 +384,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte cenu');
+          ShowMessage('Zadaj kladnu cenu');
       end;
     end;
   end;
@@ -415,7 +416,7 @@ repeat
       end;
     end
     else
-      ShowMessage('Zadajte cenu');
+      ShowMessage('Zadaj kladnu cenu');
   end
   else
   begin
@@ -441,12 +442,15 @@ repeat
 
         end
         else
-          ShowMessage('Zadajte cenu');
+          ShowMessage('Zadaj kladnu cenu');
       end;
     end;
   end;
   inc(i);
 until (z=true) or (i=riadky);
+if z=false then
+  ShowMessage('Zadany kod produktu nie je v databaze');
+aktual:=true;
 end;
 
 procedure TCenotvorba.Button5Click(Sender: TObject);
@@ -463,17 +467,16 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToInT(Pocet.Text)>=0 then
+    if StrToFloat(Pocet.Text)>0 then
     begin
-      pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
+      pole[i].nakup:=0;
       for k:=0 to riadky-1 do
       begin
-        WriteLn(cena,pole[k].kod,';',pole[k].nakup);
+      StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
       end;
-
     end
     else
-      ShowMessage('Zadajte cenu');
+      ShowMessage('Pre potvrdenie zadajte lubovolnu kladnu hodnotu do policka nakupna cena');
   end
   else
   begin
@@ -496,11 +499,9 @@ repeat
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-
-
         end
         else
-          ShowMessage('Pre potvrdenie zadajte lubovolnu hodnotu do policka nakupna cena');
+          ShowMessage('Pre potvrdenie zadajte lubovolnu kladnu hodnotu do policka nakupna cena');
       end;
     end;
   end;
@@ -523,16 +524,16 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToint(predaj.Text)>=0 then
+    if StrToFloat(predaj.Text)>=0 then
     begin
-      pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
+      pole[i].predaj:=0;
       for k:=0 to riadky-1 do
       begin
       StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
       end;
     end
     else
-      ShowMessage('Zadajte cenu');
+      ShowMessage('Pre potvrdenie zadajte lubovolnu kladnu hodnotu do policka predajna cena');
   end
   else
   begin
@@ -555,15 +556,17 @@ repeat
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
           end;
-
         end
         else
-          ShowMessage('Pre potvrdenie zadajte lubovolnu hodnotu do policka predajna cena');
+          ShowMessage('Pre potvrdenie zadajte lubovolnu kladnu hodnotu do policka predajna cena');
       end;
     end;
   end;
   inc(i);
 until (z=true) or (i=riadky);
+if z=false then
+  ShowMessage('Zadany kod produktu nie je v databaze');
+aktual:=true;
 end;
 
 procedure TCenotvorba.delete(Sender: TObject);
