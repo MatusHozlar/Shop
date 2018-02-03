@@ -216,7 +216,7 @@ repeat
       begin
       StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
       end;
-      ShowMessage('Zadaj kladnu cenu');
+      ShowMessage('Zadaj (kladnu) cenu');
     end
     else
 
@@ -243,7 +243,7 @@ repeat
           begin
             StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
           end;
-           ShowMessage('Zadaj kladnu cenu');
+           //ShowMessage('Zadaj (kladnu) cenu');
 
         end
         else
@@ -361,7 +361,7 @@ repeat
       end;
     end
     else
-      ShowMessage('Zadaj kladnu cenu');
+      ShowMessage('Zadaj (kladnu) cenu');
   end
   else
   begin
@@ -389,7 +389,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadaj kladnu cenu');
+          ShowMessage('Zadaj (kladnu) cenu');
       end;
     end;
   end;
@@ -424,7 +424,7 @@ repeat
       end;
     end
     else
-      ShowMessage('Zadaj kladnu cenu');
+      ShowMessage('Zadaj (kladnu) cenu');
   end
   else
   begin
@@ -450,7 +450,7 @@ repeat
 
         end
         else
-          ShowMessage('Zadaj kladnu cenu');
+          ShowMessage('Zadaj (kladnu) cenu');
       end;
     end;
   end;
@@ -559,7 +559,7 @@ repeat
     end;
     if cisla=true then
     begin
-      if ID.Text=IntoToStr(pole[i].kod) then
+      if ID.Text=IntToStr(pole[i].kod) then
       begin
         z:=true;
         if StrTofloat(predaj.Text)>0 then
