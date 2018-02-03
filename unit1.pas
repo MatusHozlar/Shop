@@ -208,7 +208,7 @@ repeat
     z:=true;
     if StrToINT(Pocet.Text)>0 then
     begin
-      pole[i].nakup:=strtofloat(pocet.text);
+      pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
       ReWrite(cena);
       WriteLn(cena,riadky);
       for k:=0 to riadky-1 do
@@ -331,7 +331,6 @@ begin
           begin
   WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2),';');
 end;
-
 end;
 CloseFile(cena);
 ShowMessage('Zmeny boli ulozene!');
@@ -356,7 +355,7 @@ repeat
   if (ID.Text = pole[i].nazov) then
   begin
     z:=true;
-    if StrToFloat(Pocet.Text)>0 then
+    if StrToInT(Pocet.Text)>0 then
     begin
       pole[i].nakup:=pole[i].nakup+strtofloat(pocet.text);
       ReWrite(cena);
@@ -364,7 +363,6 @@ repeat
       for k:=0 to riadky-1 do
       begin
         WriteLn(cena,pole[k].kod,';',pole[k].nakup);
-        StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
       end;
       CloseFile(cena);
 
@@ -605,23 +603,23 @@ end;
 procedure TCenotvorba.Kontrola;
 var lock:boolean;
     F1,F2,F3:integer;
-   begin
-   if (FileExists(path+'Tovar.txt')=true) and (FileExists(path+'CENNIK.txt')=true) and (FileExists(path+'TOVAR.txt')=true) then
-   begin
-   if not (FileExists(path+'SKLAD_LOCK.txt')=true) or (FileExists(path+'CENNIK_LOCK.txt')=true) or (FileExists(path+'TOVAR_LOCK.txt')=true) then
+   //begin
+   //if (FileExists(path+'Tovar.txt')=true) and (FileExists(path+'CENNIK.txt')=true) and (FileExists(path+'TOVAR.txt')=true) then
+   //begin
+   //if not (FileExists(path+'SKLAD_LOCK.txt')=true) or (FileExists(path+'CENNIK_LOCK.txt')=true) or (FileExists(path+'TOVAR_LOCK.txt')=true) then
    begin
    //LOCKOVANIE
    //F2:=FileCreate(path+'CENNIK_LOCK.txt');
    //F3:=FileCreate(path+'TOVAR_LOCK.txt');
 
      //DELETE LOCKU
-     FileClose(F2);
-     DeleteFile(path+'cennik_LOCK.txt');
-     FileClose(F3);
-     DeleteFile(path+'tovar_LOCK.txt');
+     //FileClose(F2);
+     //DeleteFile(path+'cennik_LOCK.txt');
+     //FileClose(F3);
+     //DeleteFile(path+'tovar_LOCK.txt');
 
 end;
-   end;
-   end;
+   //end;
+   //end;
 end.
 
