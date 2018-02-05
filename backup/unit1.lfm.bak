@@ -1,18 +1,22 @@
-object Form1: TForm1
-  Left = 322
-  Height = 274
-  Top = 117
-  Width = 614
-  Caption = 'Form1'
-  ClientHeight = 274
-  ClientWidth = 614
+object Cenotvorba: TCenotvorba
+  Left = 777
+  Height = 322
+  Top = 128
+  Width = 640
+  Caption = 'Cenotvorba'
+  ClientHeight = 322
+  ClientWidth = 640
   OnCreate = FormCreate
-  LCLVersion = '1.8.0.6'
+  LCLVersion = '1.4.0.4'
   object StringGrid1: TStringGrid
-    Left = 21
-    Height = 201
-    Top = 53
-    Width = 370
+    Left = 24
+    Height = 312
+    Hint = 'Tabulka je aktualizovana kazdych 5 sekund'#13#10'Moznost pouzit jednoduche klavesove skratky ako CTRL +C'
+    Top = 8
+    Width = 256
+    FixedCols = 0
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
     Cells = (
       4
@@ -30,63 +34,155 @@ object Form1: TForm1
       'Predaj'
     )
   end
-  object Memo1: TMemo
-    Left = 425
-    Height = 90
-    Top = 81
-    Width = 150
-    Lines.Strings = (
-      'Memo1'
-    )
-    TabOrder = 2
-  end
-  object Memo2: TMemo
-    Left = 424
-    Height = 90
-    Top = 176
-    Width = 150
-    Lines.Strings = (
-      'Memo2'
-    )
-    TabOrder = 3
-  end
   object ID: TEdit
-    Left = 24
+    Left = 320
     Height = 23
-    Top = 200
+    Hint = 'Zadaj ID produktu alebo nazov produktu'#13#10'Zadavat bez medzier, pokial nejde o viac slovne nazvy'
+    Top = 24
     Width = 80
-    TabOrder = 4
-  end
-  object Pocet: TEdit
-    Left = 128
-    Height = 23
-    Top = 200
-    Width = 80
-    TabOrder = 5
-  end
-  object predaj: TEdit
-    Left = 232
-    Height = 23
-    Top = 200
-    Width = 80
-    TabOrder = 6
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    Text = '0'
   end
   object Button1: TButton
-    Left = 80
-    Height = 25
-    Top = 240
-    Width = 75
-    Caption = 'Button1'
+    Left = 536
+    Height = 26
+    Hint = 'Prirad nakupnu a predajnu cenu'#13#10'Potrebne vyplnene obe ceny!'
+    Top = 88
+    Width = 99
+    Caption = 'Pridaj obe ceny'
     OnClick = Button1Click
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 0
   end
   object Button2: TButton
-    Left = 224
+    Left = 552
     Height = 25
-    Top = 240
+    Hint = 'Ulozit tabulku do .txt '#13#10'(Nenacenene produkty dostanu cenu 0)'
+    Top = 280
     Width = 75
-    Caption = 'Button2'
+    Caption = 'Ulozit zmeny'
     OnClick = Button2Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object Label1: TLabel
+    Left = 320
+    Height = 15
+    Top = 8
+    Width = 34
+    Caption = 'Label1'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 320
+    Height = 15
+    Top = 66
+    Width = 34
+    Caption = 'Label2'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 440
+    Height = 15
+    Top = 66
+    Width = 34
+    Caption = 'Label3'
+    ParentColor = False
+  end
+  object pocet: TFloatSpinEdit
+    Left = 320
+    Height = 23
+    Hint = 'Zadaj kladnu nakupnu cenu'
+    Top = 88
+    Width = 90
+    Increment = 1
+    MaxValue = 999999
+    MinValue = 0
+    OnChange = pocetChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+    Value = 0
+  end
+  object predaj: TFloatSpinEdit
+    Left = 440
+    Height = 23
+    Hint = 'Zadaj kladnu predajnu cenu'
+    Top = 88
+    Width = 84
+    Increment = 1
+    MaxValue = 999999
+    MinValue = 0
+    OnChange = predajChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 5
+    Value = 0
+  end
+  object Button3: TButton
+    Left = 320
+    Height = 25
+    Hint = 'Prirad nakupnu cenu'
+    Top = 120
+    Width = 75
+    Caption = 'Pridaj cenu'
+    OnClick = Button3Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 6
+  end
+  object Button4: TButton
+    Left = 440
+    Height = 25
+    Hint = 'Prirad predajnu cenu'
+    Top = 120
+    Width = 75
+    Caption = 'Pridaj cenu'
+    OnClick = Button4Click
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 7
+  end
+  object Button5: TButton
+    Left = 320
+    Height = 25
+    Hint = 'Na potvrdenie zmazania ceny zadaj lubovolnu kladnu hodnotu do nakupnej hodnoty'
+    Top = 184
+    Width = 131
+    Caption = 'Vymaz nakupnu cenu'
+    OnClick = Button5Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 8
+  end
+  object Button6: TButton
+    Left = 480
+    Height = 25
+    Hint = 'Na potvrdenie zmazania ceny zadaj lubovolnu kladnu hodnotu do predajnej hodnoty'
+    Top = 184
+    Width = 131
+    Caption = 'Vymaz predajnu cenu'
+    OnClick = Button6Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 9
+  end
+  object Label4: TLabel
+    Left = 320
+    Height = 15
+    Top = 168
+    Width = 34
+    Caption = 'Label4'
+    ParentColor = False
+  end
+  object Timer1: TTimer
+    Interval = 5000
+    OnTimer = Timer1Timer
+    left = 331
+    top = 245
   end
 end

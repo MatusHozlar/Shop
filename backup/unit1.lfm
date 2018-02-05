@@ -1,7 +1,7 @@
 object Cenotvorba: TCenotvorba
-  Left = 279
+  Left = 319
   Height = 322
-  Top = 129
+  Top = 140
   Width = 640
   Caption = 'Cenotvorba'
   ClientHeight = 322
@@ -11,7 +11,7 @@ object Cenotvorba: TCenotvorba
   object StringGrid1: TStringGrid
     Left = 24
     Height = 312
-    Hint = 'Tabulka je aktualizovana kazdych 5 sekund'#13#10'Moznost pouzit jednoduche klavesove skratky ako CTRL +C'#13#10'Zadany nazov/ID nesmie obsahovat medzery!'
+    Hint = 'Tabulka je aktualizovana kazdych 5 sekund'#13#10'Moznost pouzit jednoduche klavesove skratky ako CTRL +C'
     Top = 8
     Width = 256
     FixedCols = 0
@@ -37,7 +37,7 @@ object Cenotvorba: TCenotvorba
   object ID: TEdit
     Left = 320
     Height = 23
-    Hint = 'Zadaj ID produktu alebo nazov produktu'
+    Hint = 'Zadaj ID produktu alebo nazov produktu'#13#10'Zadavat bez medzier, pokial nejde o viac slovne nazvy'
     Top = 24
     Width = 80
     ParentShowHint = False
@@ -150,7 +150,7 @@ object Cenotvorba: TCenotvorba
   object Button5: TButton
     Left = 320
     Height = 25
-    Hint = 'Na potvrdenie zmazania ceny zadaj lubovolnu kladnu hodnotu do nakupnej hodnoty'
+    Hint = 'Produkt je zadavany ID/nazvom produktu'#13#10'Na potvrdenie zmazania ceny zadaj lubovolnu kladnu hodnotu do nakupnej hodnoty'
     Top = 184
     Width = 131
     Caption = 'Vymaz nakupnu cenu'
@@ -162,7 +162,7 @@ object Cenotvorba: TCenotvorba
   object Button6: TButton
     Left = 480
     Height = 25
-    Hint = 'Na potvrdenie zmazania ceny zadaj lubovolnu kladnu hodnotu do predajnej hodnoty'
+    Hint = 'Produkt je zadavany ID/nazvom produktu'#13#10'Na potvrdenie zmazania ceny zadaj lubovolnu kladnu hodnotu do predajnej hodnoty'
     Top = 184
     Width = 131
     Caption = 'Vymaz predajnu cenu'
@@ -177,6 +177,14 @@ object Cenotvorba: TCenotvorba
     Top = 168
     Width = 34
     Caption = 'Label4'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 480
+    Height = 15
+    Top = 168
+    Width = 34
+    Caption = 'Label5'
     ParentColor = False
   end
   object Timer1: TTimer

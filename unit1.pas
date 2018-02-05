@@ -20,6 +20,7 @@ type
     Button5: TButton;
     Button6: TButton;
     Label4: TLabel;
+    Label5: TLabel;
     pocet: TFloatSpinEdit;
     predaj: TFloatSpinEdit;
     Label1: TLabel;
@@ -80,7 +81,9 @@ AssignFile(cena,'cennik.txt');
 Label1.Caption:='ID produktu';
 Label2.Caption:='Nakupna cena';
 label3.Caption:='Predajna cena';
-Label4.Caption:='Vymazat nakupnu/predajnu cenu zvoleneho produktu';
+Label4.Caption:='Vymazat nakupnu cenu';
+Label5.Caption:='Vymazat nakupnu cenu';
+
 
 //nacitanie suborov
 
@@ -324,7 +327,7 @@ begin
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
-  WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2),';');
+  WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2));
 end;
 end;
 CloseFile(cena);
@@ -442,7 +445,7 @@ repeat
         z:=true;
         if StrTofloat(predaj.Text)>0 then
         begin
-          pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
+          pole[i].predaj:=strtofloat(predaj.Text);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);

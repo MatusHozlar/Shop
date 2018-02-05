@@ -20,6 +20,7 @@ type
     Button5: TButton;
     Button6: TButton;
     Label4: TLabel;
+    Label5: TLabel;
     pocet: TFloatSpinEdit;
     predaj: TFloatSpinEdit;
     Label1: TLabel;
@@ -56,7 +57,7 @@ type
     predaj:float;
   end;
   const
-  path='';  //\\comenius\public\market\timb\
+  path='\\comenius\public\market\timB\';  //\\comenius\public\market\timb\
 var
   Cenotvorba: TCenotvorba;
   sklad,cena,tovar,transakcia,statistiky:textfile;
@@ -74,19 +75,21 @@ procedure TCenotvorba.FormCreate(Sender: TObject);
 var i,k:integer;c:char;cislo:string;
 begin
 DecimalSeparator:='.';
-AssignFile(sklad,'tovar.txt');
-AssignFile(cena,'cennik.txt');
+AssignFile(sklad,path+'tovar.txt');
+AssignFile(cena,path+'cennik.txt');
 {ShowMessage('Program je iba v Alpha stadiu riesenia - niektore funkcie nemusia fungovat spravne!' );}
 Label1.Caption:='ID produktu';
 Label2.Caption:='Nakupna cena';
 label3.Caption:='Predajna cena';
-Label4.Caption:='Vymazat nakupnu/predajnu cenu zvoleneho produktu';
+Label4.Caption:='Vymazat nakupnu cenu';
+Label5.Caption:='Vymazat nakupnu cenu';
+
 
 //nacitanie suborov
 
 cislo:='';
-  AssignFile(sklad,'tovar.txt');
-  AssignFile(cena,'cennik.txt');
+  AssignFile(sklad,path+'tovar.txt');
+  AssignFile(cena,path+'cennik.txt');
   editcennik:=FileAge('CENNIK.txt');
   edittovar:=FileAge('TOVAR.txt');
   prikaz:=0;
@@ -216,7 +219,7 @@ repeat
       begin
       StringGrid1.Cells[2,k+1]:=floattostr(pole[k].nakup);
       end;
-      ShowMessage('Zadaj (kladnu) cenu');
+      //ShowMessage('Zadaj (kladnu) cenu');
     end
     else
 
@@ -324,7 +327,7 @@ begin
           WriteLn(cena,riadky);
           for k:=0 to riadky-1 do
           begin
-  WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2),';');
+  WriteLn(cena,pole[k].kod,';',FloatToStrF(pole[k].nakup,fffixed,30,2),';',FloatToStrF(pole[k].predaj,fffixed,30,2));
 end;
 end;
 CloseFile(cena);
@@ -442,7 +445,7 @@ repeat
         z:=true;
         if StrTofloat(predaj.Text)>0 then
         begin
-          pole[i].predaj:=pole[i].predaj+strtofloat(predaj.Text);
+          pole[i].predaj:=strtofloat(predaj.Text);
           for k:=0 to riadky-1 do
           begin
             StringGrid1.Cells[3,k+1]:=floattostr(pole[k].predaj);
